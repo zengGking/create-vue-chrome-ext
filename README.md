@@ -1,6 +1,6 @@
 <h1 align="center"> vue-chrome-extension-template</h1><h6 align="right">————向优秀致敬，向榜样学习</h6>
 
-​											![](https://img.shields.io/badge/license-Mulan PSL v2-blueviolet)![](https://img.shields.io/badge/chrome_extension-v1.0.0-blueviolet)![](https://img.shields.io/badge/Vue3-webpack-blueviolet)
+​											![](https://img.shields.io/badge/license-Mulan_PSL_v2-blueviolet)![](https://img.shields.io/badge/chrome_extension-v1.0.0-blueviolet)![](https://img.shields.io/badge/Vue3-webpack-blueviolet)
 
 #### 介绍
 
