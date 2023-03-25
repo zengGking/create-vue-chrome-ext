@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "vue-chrome-extension-template",
+  "version": "1.0.0",
+  "description": "vue-chrome-extension-template",
+  "icons": {
+    "16": "img/icon16.png",
+    "32": "img/icon32.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "tabs",
+    "tts",
+    "notifications"
+  ],
+  "action": {
+    "default_popup": "html/popup.html"
+  },
+  "background": {
+    "service_worker": "js/background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["js/jquery-3.6.4.min.js", "js/content.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["img/*.png"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "options_ui": {
+    "page": "html/options.html",
+    "open_in_tab": true
+  }
+  
+}
