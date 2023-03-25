@@ -1,6 +1,9 @@
-# vue-chrome-extension-template
+<h1 align="center"> vue-chrome-extension-template</h1><h6 align="right">————向优秀致敬，向榜样学习</h6>
+
+​											![](https://img.shields.io/badge/license-Mulan PSL v2-blueviolet)![](https://img.shields.io/badge/chrome_extension-v1.0.0-blueviolet)![](https://img.shields.io/badge/Vue3-webpack-blueviolet)
 
 #### 介绍
+
 ​	基于vue3的chrome插件的快速开发模板，基于webpack打包工具构建项目。项目采用vue框架对popup页面、options选项页面进行开发。
 
 #### 文件资源目录
