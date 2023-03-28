@@ -6,11 +6,11 @@
 
 
 
-#### 介绍
+#### 📌介绍
 
 ​	基于vue3的chrome插件的快速开发模板，基于webpack打包工具构建项目。项目采用vue框架对popup页面、options选项页面进行开发。
 
-#### 文件资源目录
+#### 📄文件资源目录
 ```
 vue-chrome-extension-template
 ├─ dist            # 打包目录
@@ -58,7 +58,7 @@ npm run dev
 npm run build
 ```
 
-#### 使用说明
+#### 📃使用说明
 
 - 支持sass，如想更改预编译语言，可自行安装配置。
 - 基于Vue3，可自行引入element、vant等组件库。
@@ -91,7 +91,7 @@ module.exports = {
 
 
 
-#### 更新日志
+#### 📖更新日志
 
 - 2023/03/28更新	v1.0.1
   - 优化配置，提高了开发效率，提升了开发体验
