@@ -4,16 +4,23 @@
 </template>
 <script>
 export default {
-    mounted(){
+    mounted() {
         console.log(chrome);
-        
     }
 }
 </script>
 <style lang="scss">
-h2{
-    color: red;
-    font-size: 48px;
+body {
+    width: 300px;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    color: blueviolet;
+    text-align: center;
 }
 </style>
   

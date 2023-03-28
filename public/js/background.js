@@ -12,6 +12,6 @@ chrome.runtime.onMessage.addListener((res) => {
 chrome.notifications.onButtonClicked.addListener((notificationId) => {
     console.log("系统消息通知的按钮点击事件:", notificationId);
 });
-let message='hellow background';
+let message='hellow background！！！';
 console.log(message);
 

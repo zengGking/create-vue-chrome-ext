@@ -7,7 +7,7 @@ const { VueLoaderPlugin } = require('vue-loader')
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-    mode: 'production',
+    mode: process.env.NODE_ENV == 'production' ? 'production' : 'development',
     entry: {
         popup: "./src/popupView/popup.js",
         options: './src/optionsView/options.js',
@@ -16,8 +16,8 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: 'js/[name].js',
         chunkFilename: 'js/[name].chunk.js',
-        assetModuleFilename: 'media/[hash:8][ext][query]',
-        clean:true
+        assetModuleFilename: 'asset/[hash:8][ext][query]',
+        clean: true
     },
     module: {
         rules: [
@@ -29,7 +29,7 @@ module.exports = {
                     options: {
                         presets: [['@babel/preset-env', { useBuiltIns: 'usage', corejs: 3 }]],
                         cacheDirectory: true,
-                        cacheCompression:false,
+                        cacheCompression: false,
                         plugins: ['@babel/plugin-transform-runtime']
                     }
                 }
@@ -37,7 +37,7 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [
-                    MiniCssExtractPlugin.loader,
+                    process.env.NODE_ENV == 'production'?MiniCssExtractPlugin.loader:'vue-style-loader',
                     "css-loader",
                     {
                         loader: 'postcss-loader',
@@ -54,9 +54,9 @@ module.exports = {
                 ],
             },
             {
-                test: /\.s[ac]ss$/i,
+                test: /\.s[ac]ss$/,
                 use: [
-                    MiniCssExtractPlugin.loader,
+                    process.env.NODE_ENV == 'production'?MiniCssExtractPlugin.loader:'vue-style-loader',
                     "css-loader",
                     {
                         loader: 'postcss-loader',
@@ -65,7 +65,6 @@ module.exports = {
                                 plugins: [
                                     [
                                         'postcss-preset-env',
-
                                     ],
                                 ],
                             }
@@ -89,9 +88,6 @@ module.exports = {
             {
                 test: /\.(ttf|woff2?|mp3|mp4|avi)$/,
                 type: 'asset/resource',
-                // generator:{
-                //     filename:'media/[hash:8][ext][query]'
-                // }
             },
             {
                 test: /\.vue$/,
@@ -119,7 +115,7 @@ module.exports = {
             filename: 'css/[name].css',
             chunkFilename: 'css/[name].chunk.css'
         }),
-        new CssMinimizerPlugin(),//cssy压缩
+        process.env.NODE_ENV == 'production' && new CssMinimizerPlugin(),//css压缩
         new CopyPlugin({
             patterns: [
                 {
@@ -142,17 +138,14 @@ module.exports = {
         }),
         new VueLoaderPlugin(),
         new DefinePlugin({
-            _VUE_OPTIONS_API_: 'true',
-            _VUE_PROD_DEVTOOLS_: "fasle"
+            __VUE_OPTIONS_API__: 'true',
+            __VUE_PROD_DEVTOOLS__: "false"
         })
-    ],
+    ].filter(Boolean),
     optimization: {
         splitChunks: {
             chunks: 'all'
         },
-        runtimeChunk: {
-            name: (entrypoint) => 'runtime~' + entrypoint.name
-        }
     },
     resolve: {
         extensions: ['.vue', '.js', '.json'],
@@ -160,5 +153,5 @@ module.exports = {
             '@': path.resolve(__dirname, 'src'),
         },
     },
-    devtool:'source-map',//发布时建议关闭
+    devtool: process.env.NODE_ENV == 'production'?'source-map':'inline-cheap-source-map',
 }

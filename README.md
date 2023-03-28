@@ -1,6 +1,10 @@
-<h1 align="center"> vue-chrome-extension-template</h1><h6 align="right">————向优秀致敬，向榜样学习</h6>
+<h1 align="center">vue-chrome-extension-template</h1>
+<h5 align="center">打造chrome插件的快速开发模板</h5>
+<h6 align="right">————向优秀致敬，向榜样学习</h6>
+<div align="center"><img src="https://img.shields.io/badge/license-Mulan_PSL_v2-blueviolet"/><img src="https://img.shields.io/badge/chrome_extension-v1.0.0-blueviolet"/><img src="https://img.shields.io/badge/Vue3-webpack-blueviolet"/></div>
 
-​											![](https://img.shields.io/badge/license-Mulan_PSL_v2-blueviolet)![](https://img.shields.io/badge/chrome_extension-v1.0.0-blueviolet)![](https://img.shields.io/badge/Vue3-webpack-blueviolet)
+
+
 
 #### 介绍
 
@@ -22,8 +26,8 @@ vue-chrome-extension-template
 │  │  ├─ popup.js		  # popup入口文件	
 │  │  └─ popup.vue	 	  # popup主组件
 │  └─ optionsView         # options选项页面，可以不需要，按照项目需求进行删减。
-│  │  ├─ options.js		  # options选项页入口文件
-│  │  └─ options.vue	  # options主组件 
+│     ├─ options.js		  # options选项页入口文件
+│     └─ options.vue	  # options主组件 
 ├─ .browserslistrc 		  # 浏览器兼容配置
 ├─ manifest.json		  # chrome插件重要配置文件，必须有这个文件
 ├─ .gitignore             # 忽略 git 提交
@@ -48,21 +52,51 @@ cd vue-chrome-extension-template
 npm install
 
 # develop
+npm run dev
+
+# production
 npm run build
 ```
 
 #### 使用说明
 
-1.  支持sass，如想更改预编译语言，可自行安装配置。
-2.  基于Vue3，可自行引入element、vant等组件库。
-3.  无vue-router，可自行安装配置。
-4.  可更换插件图标，在public/img目录下替换掉原来的图标即可。
-5.  **由于background.js和conten.js不能编译，只能在放在public目录下，请在该目录下开发。**
-6.  **在正式发布上线前，建议将webpack.config.js的devtool功能关闭**。
+- 支持sass，如想更改预编译语言，可自行安装配置。
+- 基于Vue3，可自行引入element、vant等组件库。
+- 无vue-router，可自行安装配置。
+- 可更换插件图标，在public/img目录下替换掉原来的图标即可。
+- **⚠由于background.js和conten.js不能编译，只能在放在public目录下，请在该目录下开发。**
+- **⚠在正式发布上线前，建议将webpack.config.js的devtool功能关闭**。
+- **⚠如果不需要options选项页，请在webpack.config.js中修改如下配置，提升开发体验。**
+
+```js
+//webpack.config.js
+module.exports = {
+   
+    entry: {
+        popup: "./src/popupView/popup.js",
+       // options: './src/optionsView/options.js', 删除
+    },
+    //...
+    plugins:[
+       //...
+       //	删除以下内容
+       // new HtmlWebpackPlugin({
+       //     filename: 'html/options.html',
+       //     template: path.resolve(__dirname, 'public/options.html'),
+       //     chunks: ['options']
+       // }),
+    ]
+}
+```
+
+
 
 #### 更新日志
 
-- 2023/03/25 	更新version 1.0.0
+- 2023/03/28更新	v1.0.1
+  - 优化配置，提高了开发效率，提升了开发体验
+
+- 2023/03/25更新	v1.0.0
 
 #### 项目交流
 
