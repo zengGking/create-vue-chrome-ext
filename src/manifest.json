@@ -13,7 +13,6 @@
     "contextMenus",
     "storage",
     "tabs",
-    "tts",
     "notifications"
   ],
   "action": {
@@ -27,7 +26,7 @@
     {
       "matches": ["<all_urls>"],
       "js": ["js/jquery-3.6.4.min.js", "js/content.js"],
-      "run_at": "document_start"
+      "run_at": "document_idle"
     }
   ],
   "web_accessible_resources": [
@@ -38,7 +37,8 @@
   ],
   "options_ui": {
     "page": "html/options.html",
-    "open_in_tab": true
-  }
+    "open_in_tab": false
+  },
+  "host_permissions":[]
   
 }

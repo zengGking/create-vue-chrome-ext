@@ -4,8 +4,8 @@ chrome.contextMenus.onClicked.addListener((info) => {
 });
 
 // 监听content_scripts页面发来的消息
-chrome.runtime.onMessage.addListener((res) => {
-    console.log("接收到content_scripts消息：", res);
+chrome.runtime.onMessage.addListener((request,response) => {
+    console.log("接收到content_scripts消息：", request);
 
 });
 // 监听系统消息通知的按钮点击事件

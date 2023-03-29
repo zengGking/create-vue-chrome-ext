@@ -5,6 +5,7 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const { DefinePlugin } = require('webpack');
 const { VueLoaderPlugin } = require('vue-loader')
 const CopyPlugin = require('copy-webpack-plugin');
+const package = require('./package.json');
 
 module.exports = {
     mode: process.env.NODE_ENV == 'production' ? 'production' : 'development',
@@ -37,7 +38,7 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [
-                    process.env.NODE_ENV == 'production'?MiniCssExtractPlugin.loader:'vue-style-loader',
+                    process.env.NODE_ENV == 'production' ? MiniCssExtractPlugin.loader : 'vue-style-loader',
                     "css-loader",
                     {
                         loader: 'postcss-loader',
@@ -56,7 +57,7 @@ module.exports = {
             {
                 test: /\.s[ac]ss$/,
                 use: [
-                    process.env.NODE_ENV == 'production'?MiniCssExtractPlugin.loader:'vue-style-loader',
+                    process.env.NODE_ENV == 'production' ? MiniCssExtractPlugin.loader : 'vue-style-loader',
                     "css-loader",
                     {
                         loader: 'postcss-loader',
@@ -120,7 +121,6 @@ module.exports = {
             patterns: [
                 {
                     from: path.resolve(__dirname, "public"),
-                    to: path.resolve(__dirname, 'dist'),
                     toType: "dir",
                     globOptions: {
                         ignore: ["**/popup.html", "**/options.html"]
@@ -130,8 +130,24 @@ module.exports = {
                     }
                 },
                 {
-                    from: path.resolve(__dirname, "manifest.json"),
-                    to: path.resolve(__dirname, 'dist')
+                    from: path.resolve(__dirname, "src/scripts"),
+                    to: 'js',
+                    toType: "dir",
+                    info: {
+                        minimized: true
+                    }
+                },
+                {
+                    from: path.resolve(__dirname, "src/manifest.json"),
+                    to: "manifest.json",
+                    transform(content, path)  {
+                        const manifest = JSON.parse(content.toString());
+                        manifest.version = package.version;
+                        manifest.name = package.name;
+                        manifest.description = package.description;
+                        return JSON.stringify(manifest,null, 2);
+                    }
+
                 },
 
             ],
@@ -153,5 +169,5 @@ module.exports = {
             '@': path.resolve(__dirname, 'src'),
         },
     },
-    devtool: process.env.NODE_ENV == 'production'?'source-map':'inline-cheap-source-map',
+    devtool: process.env.NODE_ENV == 'production' ? 'source-map' : 'inline-cheap-source-map',
 }
