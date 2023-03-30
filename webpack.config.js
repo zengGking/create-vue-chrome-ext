@@ -10,13 +10,15 @@ const package = require('./package.json');
 module.exports = {
     mode: process.env.NODE_ENV == 'production' ? 'production' : 'development',
     entry: {
-        popup: "./src/popupView/popup.js",
-        options: './src/optionsView/options.js',
+        popup: "./src/view/popup/main.js",
+        options: './src/view//options/main.js',
+        content: './src/content/index.js',
+        background:'./src/background/index.js'
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'js/[name].js',
-        chunkFilename: 'js/[name].chunk.js',
+        // chunkFilename: 'js/[name].chunk.js',
         assetModuleFilename: 'asset/[hash:8][ext][query]',
         clean: true
     },
@@ -75,6 +77,13 @@ module.exports = {
                 ],
             },
             {
+                test: /\.vue$/,
+                loader: 'vue-loader',
+                options: {
+                    cacheDirectory: path.resolve(__dirname, "node_modules/.cache/vue-loader")
+                }
+            },
+            {
                 test: /\.(png|jpe?g|gif|webp|svg)$/,
                 type: "asset",
                 parser: {
@@ -89,27 +98,20 @@ module.exports = {
             {
                 test: /\.(ttf|woff2?|mp3|mp4|avi)$/,
                 type: 'asset/resource',
-            },
-            {
-                test: /\.vue$/,
-                loader: 'vue-loader',
-                options: {
-                    cacheDirectory: path.resolve(__dirname, "node_modules/.cache/vue-loader")
-                }
             }
-
-
         ]
     },
     plugins: [
         new HtmlWebpackPlugin({
+            title: 'Popup_html',
             filename: 'html/popup.html',
-            template: path.resolve(__dirname, 'public/popup.html'),
+            template: path.resolve(__dirname, 'public/index.html'),
             chunks: ['popup']
         }),
         new HtmlWebpackPlugin({
+            title: 'Options_html',
             filename: 'html/options.html',
-            template: path.resolve(__dirname, 'public/options.html'),
+            template: path.resolve(__dirname, 'public/index.html'),
             chunks: ['options']
         }),
         new MiniCssExtractPlugin({
@@ -123,16 +125,8 @@ module.exports = {
                     from: path.resolve(__dirname, "public"),
                     toType: "dir",
                     globOptions: {
-                        ignore: ["**/popup.html", "**/options.html"]
+                        ignore: ["**/index.html"]
                     },
-                    info: {
-                        minimized: true
-                    }
-                },
-                {
-                    from: path.resolve(__dirname, "src/scripts"),
-                    to: 'js',
-                    toType: "dir",
                     info: {
                         minimized: true
                     }
@@ -140,12 +134,12 @@ module.exports = {
                 {
                     from: path.resolve(__dirname, "src/manifest.json"),
                     to: "manifest.json",
-                    transform(content, path)  {
+                    transform(content, path) {
                         const manifest = JSON.parse(content.toString());
                         manifest.version = package.version;
                         manifest.name = package.name;
                         manifest.description = package.description;
-                        return JSON.stringify(manifest,null, 2);
+                        return JSON.stringify(manifest, null, 2);
                     }
 
                 },
@@ -158,16 +152,16 @@ module.exports = {
             __VUE_PROD_DEVTOOLS__: "false"
         })
     ].filter(Boolean),
-    optimization: {
-        splitChunks: {
-            chunks: 'all'
-        },
-    },
+    // optimization: {
+    //     splitChunks: {
+    //         chunks: 'all'
+    //     },
+    // },
     resolve: {
         extensions: ['.vue', '.js', '.json'],
         alias: {
             '@': path.resolve(__dirname, 'src'),
         },
     },
-    devtool: process.env.NODE_ENV == 'production' ? 'source-map' : 'inline-cheap-source-map',
+    devtool: process.env.NODE_ENV == 'production' ? 'hidden-source-map' : 'inline-cheap-source-map',
 }

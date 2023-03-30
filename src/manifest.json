@@ -10,10 +10,7 @@
     "128": "img/icon128.png"
   },
   "permissions": [
-    "contextMenus",
-    "storage",
-    "tabs",
-    "notifications"
+    
   ],
   "action": {
     "default_popup": "html/popup.html"
@@ -39,6 +36,8 @@
     "page": "html/options.html",
     "open_in_tab": false
   },
-  "host_permissions":[]
+  "host_permissions":[
+    "*://autumnfish.cn/*"
+  ]
   
 }
