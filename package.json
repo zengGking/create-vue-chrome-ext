@@ -1,18 +1,19 @@
 {
   "name": "vue-chrome-extension-template",
   "version": "0.2.0",
-  "description": "vue-chrome-extension-template",
+  "description": "打造chrome插件的快速开发模板",
   "scripts": {
     "start": "npm run dev",
     "dev": "cross-env NODE_ENV=development webpack --watch ",
     "build": "cross-env NODE_ENV=production  webpack "
   },
   "author": "zengGking",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.21.3",
     "@babel/plugin-transform-runtime": "^7.21.0",
     "@babel/preset-env": "^7.20.2",
+    "@types/chrome": "^0.0.227",
     "babel-loader": "^9.1.2",
     "copy-webpack-plugin": "^11.0.0",
     "cross-env": "^7.0.3",

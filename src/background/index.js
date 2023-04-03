@@ -1,4 +1,4 @@
-import MessageEmitter from "../util/MessageEmitter";
+import MessageEmitter from "../utils/MessageEmitter";
 import axios from "axios";
 import fetchAdapter from '@vespaiach/axios-fetch-adapter'
 const instance = axios.create({
