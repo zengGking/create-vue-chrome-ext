@@ -1,11 +1,7 @@
 <h1 align="center">vue-chrome-extension-template</h1>
 <h5 align="center">打造chrome插件的快速开发模板</h5>
 <h6 align="right">————向优秀致敬，向榜样学习</h6>
-<<<<<<< HEAD
 <div align="center"><img src="https://img.shields.io/badge/license-MIT-blueviolet"/>&ensp;<img src="https://img.shields.io/badge/chrome_extension-v0.1.1-blueviolet"/>&ensp;<img src="https://img.shields.io/badge/Vue3-webpack-blueviolet"/></div>
-=======
-<div align="center"><img src="https://img.shields.io/badge/license-MIT-blueviolet"/>&ensp;<img src="https://img.shields.io/badge/chrome_extension-v0.2.0-blueviolet"/>&ensp;<img src="https://img.shields.io/badge/Vue3-webpack-blueviolet"/></div>
->>>>>>> d8c08dda6c26e4d36f55038221952ce0314cef25
 
 
 
