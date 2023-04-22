@@ -1,11 +1,18 @@
 <template>
-    <h1>vue-chrome-extension-template</h1>
-    <h2>popup view</h2>
+    <h1>{{extName}}</h1>
+    <h2>{{extDescription}}</h2>
 </template>
 <script>
 export default {
-    mounted() {
-        console.log(chrome);
+    created() {
+        this.extName=chrome.i18n.getMessage("extName");
+        this.extDescription=chrome.i18n.getMessage('extDescription');
+    },
+    data(){
+        return{
+            extDescription:'',
+            extName:''
+        }
     }
 }
 </script>

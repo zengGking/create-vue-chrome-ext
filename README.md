@@ -1,7 +1,7 @@
 <h1 align="center">vue-chrome-extension-template</h1>
 <h5 align="center">打造chrome插件的快速开发模板</h5>
 <h6 align="right">————向优秀致敬，向榜样学习</h6>
-<div align="center"><img src="https://img.shields.io/badge/license-MIT-blueviolet"/>&ensp;<img src="https://img.shields.io/badge/chrome_extension-v0.1.1-blueviolet"/>&ensp;<img src="https://img.shields.io/badge/Vue3-webpack-blueviolet"/></div>
+<div align="center"><img src="https://img.shields.io/badge/license-MIT-blueviolet"/>&ensp;<img src="https://img.shields.io/badge/chrome_extension-v0.2.1-blueviolet"/>&ensp;<img src="https://img.shields.io/badge/Vue3-webpack-blueviolet"/></div>
 
 
 #### 📌介绍
@@ -182,8 +182,9 @@ const { isUndefined, isFormData } = utils;
 const { isStandardBrowserEnv } = browser
 ```
 #### 📖更新日志
-- 2023/04/22更新  v0.2.0
+- 2023/04/22更新  v0.2.1
   - 新增i18n
+  - 优化项目构建
 - 2023/04/03更新  v0.1.1
   - 封装了Message消息通信和Storage存储，更方便开发
   - 使content_script可以进行ajax请求

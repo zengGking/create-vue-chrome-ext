@@ -1,6 +1,6 @@
 {
   "name": "vue-chrome-extension-template",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "打造chrome插件的快速开发模板",
   "scripts": {
     "start": "npm run dev",

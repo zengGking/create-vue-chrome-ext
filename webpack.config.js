@@ -11,14 +11,14 @@ module.exports = {
     mode: process.env.NODE_ENV == 'production' ? 'production' : 'development',
     entry: {
         popup: "./src/view/popup/main.js",
-        options: './src/view//options/main.js',
+        options: './src/view/options/main.js',
         content: './src/content/index.js',
-        background:'./src/background/index.js'
+        background: './src/background/index.js'
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'js/[name].js',
-        // chunkFilename: 'js/[name].chunk.js',
+        chunkFilename: 'js/[name].chunk.js',
         assetModuleFilename: 'asset/[hash:8][ext][query]',
         clean: true
     },
@@ -133,7 +133,7 @@ module.exports = {
                 },
                 {
                     from: path.resolve(__dirname, "src/_locales"),
-                    to:"_locales",
+                    to: "_locales",
                     toType: "dir",
                 },
                 {
@@ -155,11 +155,13 @@ module.exports = {
             __VUE_PROD_DEVTOOLS__: "false"
         })
     ].filter(Boolean),
-    // optimization: {
-    //     splitChunks: {
-    //         chunks: 'all'
-    //     },
-    // },
+    optimization: {
+        splitChunks: {
+            chunks: (chunk) => {
+                return ['popup', 'options'].includes(chunk.name);
+            }
+        },
+    },
     resolve: {
         extensions: ['.vue', '.js', '.json'],
         alias: {
