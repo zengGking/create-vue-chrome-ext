@@ -1,8 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "vue-chrome-extension-template",
+  "name": "__MSG_extName__",
   "version": "1.0.0",
-  "description": "",
+  "description": "__MSG_extDescription__",
+  "default_locale":"zh_CN",
   "icons": {
     "16": "img/icon16.png",
     "32": "img/icon32.png",
@@ -11,7 +12,8 @@
   },
   "permissions": [
     "tabs",
-    "storage"
+    "storage",
+    "i18n"
   ],
   "action": {
     "default_popup": "html/popup.html"

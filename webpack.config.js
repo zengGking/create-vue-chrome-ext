@@ -132,13 +132,16 @@ module.exports = {
                     }
                 },
                 {
+                    from: path.resolve(__dirname, "src/_locales"),
+                    to:"_locales",
+                    toType: "dir",
+                },
+                {
                     from: path.resolve(__dirname, "src/manifest.json"),
                     to: "manifest.json",
                     transform(content, path) {
                         const manifest = JSON.parse(content.toString());
                         manifest.version = package.version;
-                        manifest.name = package.name;
-                        manifest.description = package.description;
                         return JSON.stringify(manifest, null, 2);
                     }
 

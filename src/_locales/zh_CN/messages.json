@@ -1,0 +1,10 @@
+{
+    "extName": {
+        "message": "vue-chrome-extension-template",
+        "description": "插件名称"
+    },
+    "extDescription": {
+        "message": "打造chrome插件的快速开发模板",
+        "description": "插件描述"
+    }
+}

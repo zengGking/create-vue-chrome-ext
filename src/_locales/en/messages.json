@@ -1,0 +1,10 @@
+{
+    "extName": {
+        "message": "vue-chrome-extension-template",
+        "description": " Extension name "
+    },
+    "extDescription": {
+        "message": "Create a quick development template for chrome extension",
+        "description": " Extension description "
+    }
+}

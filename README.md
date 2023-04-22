@@ -4,8 +4,6 @@
 <div align="center"><img src="https://img.shields.io/badge/license-MIT-blueviolet"/>&ensp;<img src="https://img.shields.io/badge/chrome_extension-v0.1.1-blueviolet"/>&ensp;<img src="https://img.shields.io/badge/Vue3-webpack-blueviolet"/></div>
 
 
-
-
 #### 📌介绍
 
 ​		基于vue3的chrome插件的快速开发模板，基于webpack打包工具构建项目。项目采用vue框架对popup页面、options选项页面进行开发。
@@ -42,8 +40,10 @@ vue-chrome-extension-template
 #### 开始
 
 ```
-# clone the project
+# clone the project from gitee
 git clone https://gitee.com/zengGking/vue-chrome-extension-template
+# clone the project from github
+git clone https://github.com/zengGking/vue-chrome-extension-template
 
 # enter the project directory
 cd vue-chrome-extension-template
@@ -63,6 +63,7 @@ npm run build
 #### 📃使用说明
 
 - 支持sass，如想更改预编译语言，可自行安装配置。
+- 支持i18n。
 - content_script支持jQuery。
 - 基于Vue3，可自行引入elementUI、vant等组件库。
 - 无vue-router，可自行安装配置。
@@ -104,6 +105,7 @@ messageEmitter.on('ajax',  (message, sender, sendResponse) => {
     instance.request(message.data).then((res) => {
         sendResponse(res);
     })
+    return true;
 })
 
 
@@ -111,7 +113,9 @@ messageEmitter.on('ajax',  (message, sender, sendResponse) => {
 import MessageEmitter from "../util/MessageEmitter";
 const messageEmitter = new MessageEmitter();
 //发送消息
-messageEmitter.emit('ajax', { url:"https://autumnfish.cn/personalized", method: 'get', params: { limit: 10 }  })
+messageEmitter.emit('ajax', { url:"https://autumnfish.cn/personalized", method: 'get', params: { limit: 10 }  },(res)=>{
+  console.log(res);
+})
 
 //移除监听
 messageEmitter.off('ajax');
@@ -135,6 +139,7 @@ messageEmitter.on('ajax',  (message, sender, sendResponse) => {
     instance.request(message.data).then((res) => {
         sendResponse(res);
     })
+    return true;
 })
 
 //content.js
@@ -177,6 +182,8 @@ const { isUndefined, isFormData } = utils;
 const { isStandardBrowserEnv } = browser
 ```
 #### 📖更新日志
+- 2023/04/22更新  v0.2.0
+  - 新增i18n
 - 2023/04/03更新  v0.1.1
   - 封装了Message消息通信和Storage存储，更方便开发
   - 使content_script可以进行ajax请求
@@ -193,5 +200,4 @@ const { isStandardBrowserEnv } = browser
 
 #### 计划下次更新
 
-- i18
 - inject.js

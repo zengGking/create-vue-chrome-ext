@@ -1,4 +1,4 @@
-import MessageEmitter from "../util/MessageEmitter";
+import MessageEmitter from "../utils/MessageEmitter";
 
 /**
  * AJAX
