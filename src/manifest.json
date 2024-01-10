@@ -12,8 +12,7 @@
   },
   "permissions": [
     "tabs",
-    "storage",
-    "i18n"
+    "storage"
   ],
   "action": {
     "default_popup": "html/popup.html"
@@ -40,7 +39,7 @@
     "open_in_tab": false
   },
   "host_permissions":[
-    "*://autumnfish.cn/*"
+    "*://*.baidu.com/*"
   ]
   
 }

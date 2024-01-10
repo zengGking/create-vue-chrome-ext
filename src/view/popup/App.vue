@@ -1,33 +1,31 @@
 <template>
-    <h1>{{extName}}</h1>
-    <h2>{{extDescription}}</h2>
+  <nav>
+    <router-link to="/">Home</router-link> |
+    <router-link to="/about">About</router-link>
+  </nav>
+  <router-view/>
 </template>
-<script>
-export default {
-    created() {
-        this.extName=chrome.i18n.getMessage("extName");
-        this.extDescription=chrome.i18n.getMessage('extDescription');
-    },
-    data(){
-        return{
-            extDescription:'',
-            extName:''
-        }
-    }
-}
-</script>
+
 <style lang="scss">
-body {
-    width: 300px;
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  width: 300px;
 }
 
-h1 {
-    text-align: center;
-}
+nav {
+  padding: 30px;
 
-h2 {
-    color: blueviolet;
-    text-align: center;
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+
+    &.router-link-exact-active {
+      color: #42b983;
+    }
+  }
 }
 </style>
-  

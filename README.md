@@ -1,16 +1,16 @@
-<h1 align="center">vue-chrome-extension-template</h1>
-<h5 align="center">打造chrome插件的快速开发模板</h5>
+<h1 align="center">create-vue-chrome-ext</h1>
+<h5 align="center">打造chrome插件的快速开发项目</h5>
 <h6 align="right">————向优秀致敬，向榜样学习</h6>
 <div align="center"><img src="https://img.shields.io/badge/license-MIT-blueviolet"/>&ensp;<img src="https://img.shields.io/badge/chrome_extension-v0.2.1-blueviolet"/>&ensp;<img src="https://img.shields.io/badge/Vue3-webpack-blueviolet"/></div>
 
 
 #### 📌介绍
 
-​		基于vue3的chrome插件的快速开发模板，基于webpack打包工具构建项目。项目采用vue框架对popup页面、options选项页面进行开发。
+​		基于Vue3快速开发chrome插件，基于webpack打包工具构建项目。项目采用vue框架对popup页面、options选项页面进行开发。
 
 #### 📄文件资源目录
 ```
-vue-chrome-extension-template
+create-vue-chrome-ext
 ├─ dist            # 打包目录
 ├─ public          # 静态资源文件（该文件夹不会被打包）
 │  ├─ img				# 存放插件图标，亦可存放图片资源
@@ -41,12 +41,12 @@ vue-chrome-extension-template
 
 ```
 # clone the project from gitee
-git clone https://gitee.com/zengGking/vue-chrome-extension-template
+git clone https://gitee.com/zengGking/create-vue-chrome-ext
 # clone the project from github
-git clone https://github.com/zengGking/vue-chrome-extension-template
+git clone https://github.com/zengGking/create-vue-chrome-ext
 
 # enter the project directory
-cd vue-chrome-extension-template
+cd create-vue-chrome-ext
 
 # install dependency
 npm install
@@ -66,7 +66,6 @@ npm run build
 - 支持i18n。
 - content_script支持jQuery。
 - 基于Vue3，可自行引入elementUI、vant等组件库。
-- 无vue-router，可自行安装配置。
 - 可更换插件图标，在public/img目录下替换掉原来的图标即可。
 - **⚠在正式发布上线前，建议将webpack.config.js的devtool功能关闭。**
 - **⚠如果不需要options选项页，请在webpack.config.js中修改如下配置，提升开发体验。**
@@ -74,7 +73,6 @@ npm run build
 ```js
 //webpack.config.js
 module.exports = {
-   
     entry: {
         popup: "./src/view/popup/main.js",
         //options: './src/view//options/main.js', 删除
@@ -96,62 +94,43 @@ module.exports = {
 #### 📧Message消息通信
 ```js
 // background.js
-import MessageEmitter from "../util/MessageEmitter";
-const messageEmitter = new MessageEmitter();
-/**
- * 监听消息
- */
-messageEmitter.on('ajax',  (message, sender, sendResponse) => {
-    instance.request(message.data).then((res) => {
-        sendResponse(res);
-    })
-    return true;
+import { Message } from "../utils/Message";
+const message = new Message();
+message.listening('hellow', (data) => {
+    console.log('contentjs传来的数据1：', data);
 })
-
+message.listening('hellow', (data)=>{
+    console.log('contentjs传来的数据2：', data);
+})
+message.listeningResponse('sum', (data) => {
+    //需要返回响应数据
+    console.log('sum1');
+    return data.data.reduce((pre, cur) => pre + cur, 0)
+})
 
 // content.js
-import MessageEmitter from "../util/MessageEmitter";
-const messageEmitter = new MessageEmitter();
-//发送消息
-messageEmitter.emit('ajax', { url:"https://autumnfish.cn/personalized", method: 'get', params: { limit: 10 }  },(res)=>{
-  console.log(res);
+import { Message } from "../utils/Message";
+const message = new Message()
+message.send('hellow', { msg: 'hellow1' })
+message.request('sum', { data: [1111, 2222, 3333, 4444, 5555, 6666] }).then((res) => {
+  console.log('求和结果：', res);
 })
 
-//移除监听
-messageEmitter.off('ajax');
 ```
-#### 💡content_script发送Ajax请求
-原理：利用chrome.runtime.sendMessage给background发送Message，由background发送Ajax请求返回数据给content_script。
+#### 💡content_script进行http请求
+原理：利用chrome.runtime.sendMessage给background发送Message，由background发送http请求返回数据给content_script。
 ```js
 // background.js
-import MessageEmitter from "../util/MessageEmitter";
-import axios from "axios";
-import fetchAdapter from '@vespaiach/axios-fetch-adapter'
-const instance = axios.create({
-    timeout: 5000,
-    adapter: fetchAdapter
-});
-const messageEmitter = new MessageEmitter();
-/**
- * 先监听ajax消息
- */
-messageEmitter.on('ajax',  (message, sender, sendResponse) => {
-    instance.request(message.data).then((res) => {
-        sendResponse(res);
-    })
-    return true;
-})
+import { HttpServer } from "./HttpServer";
+const httpServer = new HttpServer();//开启http服务，content_script才能进行http请求
 
 //content.js
-import { request } from "./request"
-/**
- * 发送Ajax请求 Axios风格
- */
-request("https://autumnfish.cn/personalized", { method: 'get', params: { limit: 10 } })
+import { HttpClient } from "./HttpClient";
+const httpClient = new HttpClient()
+httpClient.request("https://wenku.baidu.com/gsearch/rec/homerec?pn=1&rn=16", { method: 'get', params: { limit: 10 } })
     .then((res) => {
-      //处理响应数据
-      console.log(res);
- 	})
+      console.log('http测试', res);
+  	})
 ```
 #### ⚠注意！！！
 如果打包时出现 Module not found 错误，请进行以下尝试：
@@ -162,11 +141,7 @@ request("https://autumnfish.cn/personalized", { method: 'get', params: { limit: 
   ...
   "exports": {
     ...
-    "./lib/core/settle":"./lib/core/settle",
-    "./lib/helpers/buildURL":"./lib/helpers/buildURL",
-    "./lib/core/buildFullPath":"./lib/core/buildFullPath",
-    "./lib/utils":"./lib/utils",
-    "./lib/platform/browser":"./lib/platform/browser"
+    "./lib/*":"./lib/*"
   },
 }
 ```
@@ -182,12 +157,16 @@ const { isUndefined, isFormData } = utils;
 const { isStandardBrowserEnv } = browser
 ```
 #### 📖更新日志
+- 2024/01/10更新 v0.2.2
+  - 优化了消息通信
+  - 优化了http请求
+
 - 2023/04/22更新  v0.2.1
   - 新增i18n
   - 优化项目构建
 - 2023/04/03更新  v0.1.1
   - 封装了Message消息通信和Storage存储，更方便开发
-  - 使content_script可以进行ajax请求
+  - 使content_script可以进行http请求
   - 优化目录结构与webpack配置
 - 2023/03/29更新	v0.0.2
   - 优化配置，提高了开发效率，提升了开发体验
@@ -201,4 +180,4 @@ const { isStandardBrowserEnv } = browser
 
 #### 计划下次更新
 
-- inject.js
+- 支持ts

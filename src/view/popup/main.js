@@ -1,4 +1,6 @@
 import { createApp } from 'vue'
 import popup from './App.vue'
-
-createApp(popup).mount('#app');
+import  router  from "./router";
+const app = createApp(popup)
+app.use(router)
+app.mount('#app');

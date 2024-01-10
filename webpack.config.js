@@ -38,6 +38,25 @@ module.exports = {
                 }
             },
             {
+                test: /\.tsx?$/,
+                exclude: /node_modules/,
+                use: [{
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [['@babel/preset-env', { useBuiltIns: 'usage', corejs: 3 }]],
+                        cacheDirectory: true,
+                        cacheCompression: false,
+                        plugins: ['@babel/plugin-transform-runtime']
+                    }
+                }, {
+                    loader: "ts-loader",
+                    options: {
+                        configFile: path.resolve(process.cwd(), 'tsconfig.json'),
+                        appendTsSuffixTo: [/\.vue$/]
+                    },
+                }]
+            },
+            {
                 test: /\.css$/,
                 use: [
                     process.env.NODE_ENV == 'production' ? MiniCssExtractPlugin.loader : 'vue-style-loader',
@@ -163,7 +182,7 @@ module.exports = {
         },
     },
     resolve: {
-        extensions: ['.vue', '.js', '.json'],
+        extensions: ['.vue', '.js', '.ts', '.json'],
         alias: {
             '@': path.resolve(__dirname, 'src'),
         },
