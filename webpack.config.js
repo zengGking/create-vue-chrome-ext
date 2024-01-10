@@ -5,13 +5,12 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const { DefinePlugin } = require('webpack');
 const { VueLoaderPlugin } = require('vue-loader')
 const CopyPlugin = require('copy-webpack-plugin');
-const package = require('./package.json');
 
 module.exports = {
     mode: process.env.NODE_ENV == 'production' ? 'production' : 'development',
     entry: {
-        popup: "./src/view/popup/main.js",
-        options: './src/view/options/main.js',
+        popup: "./src/pages/popup/main.js",
+        options: './src/pages/options/main.js',
         content: './src/content/index.js',
         background: './src/background/index.js'
     },
@@ -160,6 +159,7 @@ module.exports = {
                     to: "manifest.json",
                     transform(content, path) {
                         const manifest = JSON.parse(content.toString());
+                        const package = require('./package.json');
                         manifest.version = package.version;
                         return JSON.stringify(manifest, null, 2);
                     }

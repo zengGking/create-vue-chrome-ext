@@ -19,7 +19,7 @@ create-vue-chrome-ext
 │  ├─ util              # 工具包	    
 │  ├─ background        # chrome插件的background页面	    
 │  ├─ content           # chrome插件的content_script
-│  ├─ view              
+│  ├─ pages              
 │  │  ├─ popup            # popup页面
 │  │  │  ├─ main.js		    # popup入口文件	
 │  │  │  └─ App.vue	 	    # popup主组件
