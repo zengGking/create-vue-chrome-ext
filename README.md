@@ -8,7 +8,7 @@
 
 ​		基于Vue3快速开发chrome插件，基于webpack打包工具构建项目。项目采用vue框架对popup页面、options选项页面进行开发。
 
-#### 📄文件资源目录
+#### 📄项目结构
 ```
 create-vue-chrome-ext
 ├─ dist            # 打包目录
@@ -39,7 +39,7 @@ create-vue-chrome-ext
 
 #### 开始
 
-```
+```powershell
 # clone the project from gitee
 git clone https://gitee.com/zengGking/create-vue-chrome-ext
 # clone the project from github
