@@ -2,6 +2,7 @@ import { Message } from "../utils/Message";
 import { HttpServer } from "./HttpServer";
 
 const httpServer = new HttpServer();//开启http服务，content_script才能进行http请求
+httpServer.start()
 //message测试
 const message = new Message();
 message.listening('hellow', (data) => {
@@ -15,7 +16,7 @@ message.listeningResponse('sum', (data) => {
     console.log('sum1');
     return data.data.reduce((pre, cur) => pre + cur, 0)
 })
-//i18测试
+//i18n测试
 console.log('hellow background！！！', chrome.i18n.getMessage('extDescription'));
 
 

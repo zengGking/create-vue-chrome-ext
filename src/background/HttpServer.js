@@ -5,13 +5,13 @@ const instance = axios.create({
     adapter: fetchAdapter
 });
 
-export class HttpServer{
+export class HttpServer {
 
-    constructor(){
+    start() {
         chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-            if(message.cmd=='http'){
+            if (message.cmd === 'http') {
                 instance.request(message.data).then((res) => {
-                    sendResponse(res);
+                    sendResponse(res.data);
                 })
                 return true;
             }

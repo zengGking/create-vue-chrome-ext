@@ -118,11 +118,12 @@ message.request('sum', { data: [1111, 2222, 3333, 4444, 5555, 6666] }).then((res
 
 ```
 #### 💡content_script进行http请求
-原理：利用chrome.runtime.sendMessage给background发送Message，由background发送http请求返回数据给content_script。
+原理：由content_script转发http请求给background，由background发送http请求并返回数据给content_script。
 ```js
 // background.js
 import { HttpServer } from "./HttpServer";
 const httpServer = new HttpServer();//开启http服务，content_script才能进行http请求
+httpServer.start()
 
 //content.js
 import { HttpClient } from "./HttpClient";

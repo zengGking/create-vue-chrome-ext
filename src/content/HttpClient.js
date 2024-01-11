@@ -2,11 +2,6 @@
 
 export class HttpClient {
     constructor() {
-        // this.callbacks = {};
-        // chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-        //     if (this.callbacks[message.cmd])
-        //         return this.callbacks[message.messageType](message.data, sender, sendResponse);
-        // });
 
     }
     /**
